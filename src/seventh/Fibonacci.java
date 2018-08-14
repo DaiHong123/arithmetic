@@ -1,4 +1,4 @@
-package Seventh;
+package seventh;
 
 /**
  * @Description: $description$
