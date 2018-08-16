@@ -1,5 +1,7 @@
 package thirtieth;
 
+import com.sun.deploy.util.ArrayUtil;
+
 /**
  * @Description: 求一个数组中最小的k个数.
  * @Author: daihong
@@ -8,9 +10,17 @@ package thirtieth;
 public class Test {
     public static void main(String[] args) {
         int k = 4;
-        int[] arr = {4, 5, 1, 6, 2, 7, 3, 8};
+        int[] arr = {4, 5, 1, 6};
         //quickSort(arr, k);
-        qSort1(arr,0,arr.length-1);
+        /*qSort1(arr, 0, arr.length - 1);
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }*/
+        heap(arr);
+       /* if(k<arr[0]){
+            arr[0] = k;
+            heap(arr);
+        }*/
         for(int i=0;i<arr.length;i++){
             System.out.println(arr[i]);
         }
@@ -55,39 +65,42 @@ public class Test {
         int pivot = arr[pivotIndex];
         swap(arr, pivotIndex, end);
         int storeIndex = begin;
-        for(int i=begin;i<end;i++){
-            if (arr[i]<pivot){
-                swap(arr,i,storeIndex);
+        for (int i = begin; i < end; i++) {
+            if (arr[i] < pivot) {
+                swap(arr, i, storeIndex);
                 ++storeIndex;
             }
         }
-        swap(arr,storeIndex,end);
+        swap(arr, storeIndex, end);
         return storeIndex;
     }
-    public static int partition2(int[] arr, int begin, int end, int pivotIndex){
+
+    public static int partition2(int[] arr, int begin, int end, int pivotIndex) {
         int pivot = arr[pivotIndex];
-        swap(arr,pivotIndex,end);
-        int i = begin,j = end;
-        while (i<j){
-            while (i<j&&arr[i]<=pivot) i++;
-            while (i<j&&arr[j]>=pivot) j--;
-            if(i<j) swap(arr,i,j);
+        swap(arr, pivotIndex, end);
+        int i = begin, j = end;
+        while (i < j) {
+            while (i < j && arr[i] <= pivot) i++;
+            while (i < j && arr[j] >= pivot) j--;
+            if (i < j) swap(arr, i, j);
         }
-        swap(arr,i,end);
+        swap(arr, i, end);
         return i;
     }
-    public static void qSort(int[] arr,int begin,int end){
-        if(begin<end){
-            int p = partition(arr,begin,end,end);
-            qSort(arr,begin,p-1);
-            qSort(arr,p+1,end);
+
+    public static void qSort(int[] arr, int begin, int end) {
+        if (begin < end) {
+            int p = partition(arr, begin, end, end);
+            qSort(arr, begin, p - 1);
+            qSort(arr, p + 1, end);
         }
     }
-    public static void qSort1(int[] arr,int begin,int end){
-        if(begin<end){
-            int p = partition2(arr,begin,end,end);
-            qSort1(arr,begin,p-1);
-            qSort1(arr,p+1,end);
+
+    public static void qSort1(int[] arr, int begin, int end) {
+        if (begin < end) {
+            int p = partition2(arr, begin, end, end);
+            qSort1(arr, begin, p - 1);
+            qSort1(arr, p + 1, end);
         }
     }
 
@@ -97,4 +110,41 @@ public class Test {
         arr[to] = temp;
     }
 
+    public static void heapIfy(int[] arr, int currentRootNode, int size) {
+        if (currentRootNode < size) {
+            int left = 2 * currentRootNode + 1;
+            int right = 2 * currentRootNode + 2;
+            int max = currentRootNode;
+            if (left < size) {
+                if (arr[left] > arr[max]) {
+                    max = left;
+                }
+            }
+            if (right < size) {
+                if (arr[right] > arr[max]) {
+                    max = right;
+                }
+            }
+            if (max != currentRootNode) {
+                int temp = arr[max];
+                arr[max] = arr[currentRootNode];
+                arr[currentRootNode] = temp;
+                heapIfy(arr, max, arr.length);
+            }
+        }
+    }
+
+    public static void maxHeapIfy(int[] arr, int size) {
+        for (int i = size - 1; i >= 0; i--) {
+            heapIfy(arr, i, size);
+        }
+    }
+    public static void heap(int[] arr){
+        for (int i=0;i<arr.length;i++){
+            maxHeapIfy(arr,arr.length-1);
+            int temp = arr[0];
+            arr[0] = arr[arr.length-1-i];
+            arr[arr.length-1-i] = temp;
+        }
+    }
 }

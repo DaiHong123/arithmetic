@@ -1,4 +1,4 @@
-package Frist;
+package frist;
 
 /**
  * @Description: $description$
