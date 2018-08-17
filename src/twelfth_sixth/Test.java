@@ -1,9 +1,7 @@
 package twelfth_sixth;
 
 /**
- * @Description: $description$
- * @Param: $params$
- * @return: $returns$
+ * @Description: 复制链表
  * @Author: daihong
  * @Date: $date$
  */

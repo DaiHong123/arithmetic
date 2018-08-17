@@ -3,7 +3,7 @@ package twenty_second;
 import java.util.Stack;
 
 /**
- * @Description: $description$
+ * @Description: 确定是否属于栈出
  * @Param: $params$
  * @return: $returns$
  * @Author: daihong

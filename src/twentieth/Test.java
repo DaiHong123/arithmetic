@@ -1,9 +1,7 @@
 package twentieth;
 
 /**
- * @Description: $description$
- * @Param: $params$
- * @return: $returns$
+ * @Description: 回文
  * @Author: daihong
  * @Date: $date$
  */

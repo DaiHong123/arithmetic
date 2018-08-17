@@ -3,7 +3,7 @@ package twelfth_third;
 import java.util.*;
 
 /**
- * @Description:
+ * @Description:求最小
  * @Author: daihong
  * @Date: Created in  2018/8/16
  */
