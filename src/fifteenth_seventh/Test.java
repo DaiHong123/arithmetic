@@ -43,8 +43,9 @@ public class Test {
         binaryTreeNode5.parent = binaryTreeNode2;
         binaryTreeNode6.parent = binaryTreeNode3;
         binaryTreeNode7.parent = binaryTreeNode3;
-        sort(binaryTreeNode1, binaryTreeNode4);
-
+        //sort(binaryTreeNode1, binaryTreeNode4);
+        BinaryTreeNode next = getNext(binaryTreeNode4);
+        System.out.println(next.element);
     }
 
     public static void sort(BinaryTreeNode binaryTreeNode, BinaryTreeNode pattern) {
@@ -62,11 +63,31 @@ public class Test {
                 binaryTreeNode = binaryTreeNode.right;
             }
         }
-        for(int i=0;i<linkedList.size();i++){
-            if (i<linkedList.size()-1&&pattern==linkedList.get(i)){
-                System.out.println(linkedList.get(i+1).element);
+        for (int i = 0; i < linkedList.size(); i++) {
+            if (i < linkedList.size() - 1 && pattern == linkedList.get(i)) {
+                System.out.println(linkedList.get(i + 1).element);
                 break;
             }
         }
+    }
+
+    public static BinaryTreeNode getNext(BinaryTreeNode binaryTreeNode) {
+        if (binaryTreeNode == null) {
+            return null;
+        }
+        if (binaryTreeNode.right!=null){
+            binaryTreeNode = binaryTreeNode.right;
+            while (binaryTreeNode.left!=null){
+                binaryTreeNode = binaryTreeNode.left;
+            }
+            return binaryTreeNode;
+        }
+        while (binaryTreeNode.parent!=null){
+            if (binaryTreeNode.parent.left==binaryTreeNode){
+                return binaryTreeNode.parent;
+            }
+            binaryTreeNode = binaryTreeNode.parent;
+        }
+        return null;
     }
 }
